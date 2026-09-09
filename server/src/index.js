@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/api/health", (_req, res) => {
   res.json({
     ok: true,
-    service: "global-store-api",
+    service: "social-ott-qatar-api",
     db: getDbEngine(),
     time: new Date().toISOString(),
   });
