@@ -97,17 +97,15 @@ See `Tech. Document` for full product requirements.
 
 You **do not need a paid GitHub plan** for a **public** repository. GitHub Pages is included on free accounts. This repo is public.
 
-Pushes to **`main`** run [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml), which builds the site and pushes to the **`gh-pages`** branch (site files at both `/` and `/docs`).
+This repo uses a **single `main` branch**. Built site files live at the repository root (and in `docs/`), so GitHub Pages can serve from `main`.
 
 ### One-time setup (iPhone, iPad, or computer)
 
 1. Open **https://github.com/Yunusbashashaik/Social_OTT_Qatar/settings/pages**
 2. Under **Build and deployment** → **Source**, choose **Deploy from a branch**
-3. **Branch:** `gh-pages` · **Folder:** `/ (root)` or `/docs` · **Save**
+3. **Branch:** `main` · **Folder:** `/ (root)` · **Save**
 4. Wait 1–2 minutes, then open on your iPad:
 
    **https://yunusbashashaik.github.io/Social_OTT_Qatar/**
-
-If the workflow has not run yet, go to **Actions** → **Deploy to GitHub Pages** → **Run workflow**.
 
 The homepage uses built-in catalog data if the API is unavailable. **Admin**, **live price/settings edits**, and **complaint email via SMTP** need the Node server (`npm start` on a host such as Render or GoDaddy Node). Point that host at a persistent disk so `server/data/globalstore.db` survives restarts.

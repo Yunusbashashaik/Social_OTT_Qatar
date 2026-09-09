@@ -1,8 +1,7 @@
 name: Deploy Pages (GitHub Actions)
 
-# Use only when Settings → Pages → Source = GitHub Actions.
-# Disabled on push while the site uses legacy gh-pages branch deploy,
-# so it does not fight pages-build-deployment / static uploads.
+# Optional. Use only when Settings → Pages → Source = GitHub Actions.
+# Default setup is Pages from the main branch root (no extra branches).
 
 on:
   workflow_dispatch:
