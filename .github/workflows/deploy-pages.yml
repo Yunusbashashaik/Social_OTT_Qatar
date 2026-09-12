@@ -1,14 +1,17 @@
 name: Deploy site on main
 
-# Single-branch deploy. Builds the client and commits docs/ on main.
-# GitHub Pages should use: branch main · folder /docs
+# Single-branch deploy. Builds the client and commits the site to the repo root.
+# GitHub Pages should use: branch main · folder / (root)
 # https://yunusbashashaik.github.io/Social_OTT_Qatar/
 
 on:
   push:
     branches: [main]
     paths-ignore:
-      - "docs/**"
+      - "index.html"
+      - "404.html"
+      - "assets/**"
+      - ".nojekyll"
   workflow_dispatch:
 
 permissions:
@@ -36,19 +39,22 @@ jobs:
         env:
           VITE_BASE_PATH: /Social_OTT_Qatar/
 
-      - name: Publish built site to docs/ on main
+      - name: Publish built site to repository root on main
         run: |
-          rm -rf docs
-          mkdir -p docs
-          cp -a client/dist/. docs/
-          cp client/dist/index.html docs/404.html
-          touch docs/.nojekyll
+          rm -rf assets docs
+          cp -a client/dist/. .
+          cp client/dist/index.html 404.html
+          touch .nojekyll
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs
+          git add -A index.html 404.html .nojekyll assets \
+            favicon.ico favicon.jpg logo.jpg \
+            hero-wallpaper-hd.jpg hero-wallpaper.jpg \
+            runtime-config.js sitemap.xml
+          git add -u docs || true
           if git diff --cached --quiet; then
-            echo "No docs changes"
+            echo "No Pages files changed"
             exit 0
           fi
-          git commit -m "Publish GitHub Pages from main"
+          git commit -m "Publish GitHub Pages from main root"
           git push origin HEAD:main

@@ -97,13 +97,13 @@ See `Tech. Document` for full product requirements.
 
 You **do not need a paid GitHub plan** for a **public** repository. GitHub Pages is included on free accounts. This repo is public.
 
-Pushes to **`main`** build the site and update **`docs/`** on the same branch. This repo stays on **`main` only**.
+Pushes to **`main`** build the site into the **repository root** on the same branch. This repo stays on **`main` only**.
 
 ### One-time setup (iPhone, iPad, or computer)
 
 1. Open **https://github.com/Yunusbashashaik/Social_OTT_Qatar/settings/pages**
 2. Under **Build and deployment** → **Source**, choose **Deploy from a branch**
-3. **Branch:** `main` · **Folder:** `/docs` · **Save**
+3. **Branch:** `main` · **Folder:** `/ (root)` · **Save**
 4. Wait 1–2 minutes, then open on your iPad:
 
    **https://yunusbashashaik.github.io/Social_OTT_Qatar/**
