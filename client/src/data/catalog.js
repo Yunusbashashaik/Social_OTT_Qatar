@@ -1,0 +1,81 @@
+import { DEFAULT_SETTINGS } from "./defaultSettings.js";
+
+let supportNumbers = [...DEFAULT_SETTINGS.whatsappNumbers];
+let orderLineIndex = 0;
+
+export function setSupportNumbers(numbers) {
+  if (Array.isArray(numbers) && numbers.length) {
+    supportNumbers = numbers.map((n) => String(n).replace(/\D/g, "")).filter(Boolean);
+    if (!supportNumbers.length) {
+      supportNumbers = [...DEFAULT_SETTINGS.whatsappNumbers];
+    }
+  }
+}
+
+export function nextSupportNumber() {
+  const num = supportNumbers[orderLineIndex % supportNumbers.length];
+  orderLineIndex += 1;
+  return num;
+}
+
+export function buildWhatsAppUrl(phone, message) {
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+}
+
+export function buildOrderMessage(service, durationKey, priceAmount, lang) {
+  const durationEn = durationKey === "month" ? "1 Month" : "1 Year";
+  const durationAr = durationKey === "month" ? "شهر واحد" : "سنة واحدة";
+  if (lang === "ar") {
+    return `مرحباً فريق دعم Premium Store، أود شراء الاشتراك التالي:
+
+الدولة: قطر
+الخدمة: ${service.nameAr}
+المدة: ${durationAr}
+السعر: ${priceAmount} ر.ق
+
+يرجى تزويدي بتفاصيل الدفع وإتمام طلبي.`;
+  }
+  return `Hello Premium Store Support Team, I would like to purchase the following subscription:
+
+Country: Qatar
+Service: ${service.nameEn}
+Duration: ${durationEn}
+Price: ${priceAmount} QAR
+
+Please provide payment details and complete my order.`;
+}
+
+/** No bundled catalog. The public list is whatever Admin has saved via the API. */
+export const SERVICES = [];
+
+export async function fetchServices() {
+  const { fetchPublicServices } = await import("../lib/adminApi.js");
+  return fetchPublicServices();
+}
+
+export function isOutOfStock(service) {
+  if (!service) return false;
+  if (service.outOfStock) return true;
+  const month = Number(service.prices?.month);
+  const year = Number(service.prices?.year);
+  return month === 0 || year === 0;
+}
+
+export function filterServices(services, query) {
+  const q = String(query || "").trim().toLowerCase();
+  if (!q) return services;
+  return services.filter((service) => {
+    const haystack = [service.nameEn, service.nameAr]
+      .filter(Boolean)
+      .join(" ")
+      .toLowerCase();
+    return haystack.includes(q);
+  });
+}
+
+export function ownerDisplayNames(text) {
+  return String(text || "")
+    .replace(/^(owned\s*(?:&\s*managed\s*)?by)\s+/i, "")
+    .replace(/^(مملوك(?:ة)?(?:\s*ويُدار(?:ة)?)?\s*بواسطة)\s+/i, "")
+    .trim();
+}

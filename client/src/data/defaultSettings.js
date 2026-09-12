@@ -1,0 +1,18 @@
+/** Fallback site settings when the API is unavailable. */
+export const DEFAULT_SETTINGS = {
+  complaintEmail: "global2stor2@gmail.com",
+  whatsappNumbers: ["923146996248", "923258017726"],
+  aboutEn:
+    "At Premium Store, we bring world-class entertainment right to your screen without breaking the bank. We offer instant access to top premium OTT subscriptions in Qatar at reasonable, budget-friendly prices—making streaming simple, affordable, and seamless.",
+  aboutAr:
+    "في Premium Store، نقدم لك ترفيهاً عالمياً على شاشتك دون إرهاق ميزانيتك. نوفر وصولاً فورياً إلى أفضل اشتراكات OTT المميزة في قطر بأسعار معقولة وصديقة للميزانية—لتجعل البث بسيطاً وميسور التكلفة وسلساً.",
+  ownersEn: "M Zuhaib Tariq & M Fareed Tariq",
+  ownersAr: "م. زهيب طارق وم. فريد طارق",
+  socialLinks: {
+    whatsapp: "https://whatsapp.com/channel/0029Vb8CHOHJf05iTMmChh1U",
+    instagram: "https://www.instagram.com/globalstoreold?igsh=MW1yZjdvZTYwODg1NQ==",
+    tiktok: "https://www.tiktok.com/@globalstoreshub?_r=1&_t=ZS-98c4ZtYmpmR",
+    youtube: "https://youtube.com/@globalstore-k7m?si=N-FuMtagfU6Z5Spa",
+    facebook: "https://www.facebook.com/share/1C137NoNxY/",
+  },
+};
