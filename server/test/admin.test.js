@@ -34,7 +34,7 @@ describe("services + admin API", () => {
 
     const login = await request(app)
       .post("/api/admin/login")
-      .send({ username: "admin", password: "Ss$135790" });
+      .send({ username: "admin", password: "Go$StQ821" });
     token = login.body.token;
     const created = await request(app)
       .post("/api/admin/services")
